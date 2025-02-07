@@ -1,0 +1,1 @@
+import sanity_backup_to_s3.main
