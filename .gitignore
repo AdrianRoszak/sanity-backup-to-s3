@@ -8,6 +8,12 @@ __pycache__/
 
 # Ignore virtual environment
 venv/
+.venv
 
 # Ignore Poetry lock files (if you don't want to share them)
 poetry.lock
+
+# Misc
+.DS_Store
+Thumbs.db
+.idea

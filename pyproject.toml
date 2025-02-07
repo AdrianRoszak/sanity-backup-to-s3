@@ -8,11 +8,18 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "requests (>=2.32.3,<3.0.0)",
     "boto3 (>=1.36.15,<2.0.0)",
+    "requests (>=2.32.3,<3.0.0)",
     "python-dotenv (>=1.0.1,<2.0.0)"
 ]
 
+
+[tool.poetry]
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.scripts]
+sanity = "sanity_backup_to_s3.main:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

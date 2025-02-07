@@ -36,5 +36,9 @@ def export_data(dataset_name: str, output_file: str):
         print(f"Failed to export data: {response.status_code}")
         print(response.text)
 
-# Export the production dataset
-export_data("production", "production_backup.ndjson")
+def main():
+    print("")
+    print(f"Hello Stranger, you are within - {__name__}. Have fun.")
+    print("---------------------------------------------------------------------")
+    print("")
+    export_data("production", "production_backup.ndjson")
