@@ -2,43 +2,36 @@ from dotenv import load_dotenv
 import os
 import requests
 
-# Load environment variables from .env file
 load_dotenv()
 
-# Access variables using os.getenv
 sanity_project_id = os.getenv("SANITY_PROJECT_ID")
 sanity_api_token = os.getenv("SANITY_API_BACKUP_TOKEN")
 
-# Sanity Export API URL
-sanity_api_url = os.getenv("SANITY_API_URL")
-
 def export_data(dataset_name: str, output_file: str):
-    # Set headers with the authorization token
     headers = {
         "Authorization": f"Bearer {sanity_api_token}",
     }
 
-    # Set the parameters for the export (e.g., dataset name and format)
-    params = {
-        "dataset": dataset_name,
-        "format": "ndjson",  # Format the data as ndjson
-    }
+    sanity_api_url = f"https://{sanity_project_id}.api.sanity.io/v2021-06-07/data/export/{dataset_name}"
 
-    # Send GET request to the Sanity API
-    response = requests.get(sanity_api_url, headers=headers, params=params)
+    # Wyślij żądanie GET do API Sanity
+    response = requests.get(sanity_api_url, headers=headers, stream=True)
 
-    # Check if the request was successful
     if response.status_code == 200:
         with open(output_file, 'wb') as f:
-            f.write(response.content)
-        print(f"Data successfully exported to {output_file}")
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        print(f"Dane zostały pomyślnie wyeksportowane do {output_file}")
     else:
-        print(f"Failed to export data: {response.status_code}")
+        print(f"Nie udało się wyeksportować danych: {response.status_code}")
         print(response.text)
 
 def main():
     print("")
-    print(f"Hello Stranger, you are within - {__name__}. Have fun.")
+    print(f"Witaj, jesteś w module - {__name__}. Miłej zabawy.")
     print("---------------------------------------------------------------------")
     print("")
     export_data("production", "production_backup.ndjson")
+
+if __name__ == "__main__":
+    main()

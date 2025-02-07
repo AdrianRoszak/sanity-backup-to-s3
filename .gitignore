@@ -13,6 +13,9 @@ venv/
 # Ignore Poetry lock files (if you don't want to share them)
 poetry.lock
 
+# Workshop Mess
+production_backup.ndjson
+
 # Misc
 .DS_Store
 Thumbs.db
