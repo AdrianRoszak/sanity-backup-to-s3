@@ -31,7 +31,7 @@ def main():
     print(f"Witaj, jesteś w module - {__name__}. Miłej zabawy.")
     print("---------------------------------------------------------------------")
     print("")
-    export_data("production", "production_backup.ndjson")
+    export_data("production", f"production_backup_{sanity_project_id}.ndjson")
 
 if __name__ == "__main__":
     main()

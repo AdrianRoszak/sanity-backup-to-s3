@@ -14,9 +14,10 @@ venv/
 poetry.lock
 
 # Workshop Mess
-production_backup.ndjson
+production_backup_*.ndjson
 
 # Misc
 .DS_Store
 Thumbs.db
 .idea
+
