@@ -5,7 +5,7 @@ import requests
 load_dotenv()
 
 sanity_project_id = os.getenv("SANITY_PROJECT_ID")
-sanity_api_token = os.getenv("SANITY_API_BACKUP_TOKEN")
+sanity_api_token = os.getenv("SANITY_API_READ_TOKEN")
 
 def export_data(dataset_name: str, output_file: str):
     headers = {
