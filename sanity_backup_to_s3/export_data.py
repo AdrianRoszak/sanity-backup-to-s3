@@ -1,9 +1,16 @@
 import os
 import requests
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 sanity_project_id = os.getenv("SANITY_PROJECT_ID")
 sanity_api_token = os.getenv("SANITY_API_READ_TOKEN")
 
+# Debug prints to verify environment variables
+print(f"SANITY_PROJECT_ID: {sanity_project_id}")
+print(f"SANITY_API_READ_TOKEN: {sanity_api_token}")
 
 def export_data(dataset_name: str, output_file: str):
     headers = {
@@ -11,6 +18,9 @@ def export_data(dataset_name: str, output_file: str):
     }
 
     sanity_api_url = f"https://{sanity_project_id}.api.sanity.io/v2021-06-07/data/export/{dataset_name}"
+
+    # Debug print to verify constructed URL
+    print(f"Sanity API URL: {sanity_api_url}")
 
     # Send GET request to Sanity API
     response = requests.get(sanity_api_url, headers=headers, stream=True)
