@@ -3,14 +3,10 @@ import requests
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
+load_dotenv(verbose=True, override=True)
 
 sanity_project_id = os.getenv("SANITY_PROJECT_ID")
 sanity_api_token = os.getenv("SANITY_API_READ_TOKEN")
-
-# Debug prints to verify environment variables
-print(f"SANITY_PROJECT_ID: {sanity_project_id}")
-print(f"SANITY_API_READ_TOKEN: {sanity_api_token}")
 
 def export_data(dataset_name: str, output_file: str):
     headers = {
