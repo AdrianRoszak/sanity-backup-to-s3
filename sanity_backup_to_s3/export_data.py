@@ -15,9 +15,6 @@ def export_data(dataset_name: str, output_file: str):
 
     sanity_api_url = f"https://{sanity_project_id}.api.sanity.io/v2021-06-07/data/export/{dataset_name}"
 
-    # Debug print to verify constructed URL
-    print(f"Sanity API URL: {sanity_api_url}")
-
     # Send GET request to Sanity API
     response = requests.get(sanity_api_url, headers=headers, stream=True)
 
