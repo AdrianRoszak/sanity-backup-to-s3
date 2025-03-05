@@ -5,9 +5,6 @@ This project provides a script to export data from Sanity and upload it to an AW
 ## Requirements
 
 - Python 3.12 or higher
-- `boto3` library
-- `requests` library
-- `python-dotenv` library
 
 ## Installation
 
