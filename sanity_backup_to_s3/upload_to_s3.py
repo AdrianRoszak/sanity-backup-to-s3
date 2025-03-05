@@ -1,17 +1,26 @@
 import os
+import logging
 import boto3
+from botocore.exceptions import BotoCoreError, ClientError
 
+# Configure logging
+logger = logging.getLogger(__name__)
 
 def upload_to_s3(file_name, bucket, object_name=None):
+    logger.info(f"Uploading {file_name} to S3 bucket {bucket}")
     # If S3 object_name was not specified, use file_name
     if object_name is None:
         object_name = os.path.basename(file_name)
 
-    # Upload the file
+    # Upload the file with error handling
     s3_client = boto3.client('s3')
     try:
-        response = s3_client.upload_file(file_name, bucket, object_name)
-    except Exception as e:
-        print(f"Error uploading {file_name} to {bucket}: {e}")
+        s3_client.upload_file(file_name, bucket, object_name)
+        logger.info(f"Successfully uploaded {file_name} to {bucket}")
+        return True
+    except (BotoCoreError, ClientError) as e:
+        logger.error(f"Error uploading {file_name} to {bucket}: {e}")
         return False
-    return True
+    except Exception as e:
+        logger.error(f"Unexpected error uploading {file_name}: {e}")
+        return False
