@@ -22,6 +22,15 @@ $ pip install poetry
 $ poetry install
 ```
 
+3. Ensure the `pyproject.toml` file includes the `packages` section:
+
+```toml
+[tool.poetry]
+packages = [
+    { include = "src" }
+]
+```
+
 ## Configuration
 
 1. Copy the `.env.example` file to `.env` and fill in your credentials:
