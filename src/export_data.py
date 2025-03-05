@@ -30,14 +30,11 @@ def export_data(dataset_name: str, output_file: str):
     headers = {
         "Authorization": f"Bearer {sanity_api_token}",
     }
-
     sanity_api_url = f"https://{sanity_project_id}.api.sanity.io/v2021-06-07/data/export/{dataset_name}"
-
     try:
         # Send GET request to Sanity API with retry logic
         response = http.get(sanity_api_url, headers=headers, stream=True)
         response.raise_for_status()
-
         total_size = int(response.headers.get('content-length', 0))
         bytes_written = 0
         
@@ -50,6 +47,14 @@ def export_data(dataset_name: str, output_file: str):
         
         logger.info(f"Successfully exported {bytes_written} bytes to {output_file}")
         return True
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Failed to export data: {e}")
-        return False
+    except requests.exceptions.HTTPError as http_err:
+        logger.error(f"HTTP error occurred: {http_err}")
+    except requests.exceptions.ConnectionError as conn_err:
+        logger.error(f"Connection error occurred: {conn_err}")
+    except requests.exceptions.Timeout as timeout_err:
+        logger.error(f"Timeout error occurred: {timeout_err}")
+    except requests.exceptions.RequestException as req_err:
+        logger.error(f"Request error occurred: {req_err}")
+    except Exception as e:
+        logger.error(f"An unexpected error occurred: {e}")
+    return False
