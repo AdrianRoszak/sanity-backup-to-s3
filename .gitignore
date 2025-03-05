@@ -21,3 +21,4 @@ production_backup_*.ndjson
 Thumbs.db
 .idea
 
+sanity_ids.txt
