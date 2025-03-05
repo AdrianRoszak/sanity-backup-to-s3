@@ -16,11 +16,14 @@ dependencies = [
 
 
 [tool.poetry]
+packages = [
+    { include = "src" }
+]
 [tool.poetry.dependencies]
 python = "^3.12"
 
 [tool.poetry.scripts]
-sanity = "sanity_backup_to_s3.main:main"
+sanity = "src.main:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

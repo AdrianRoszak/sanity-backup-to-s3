@@ -1,8 +1,8 @@
 import logging
 from dotenv import load_dotenv
 import os
-from export_data import export_data
-from upload_to_s3 import upload_to_s3
+from .export_data import export_data
+from .upload_to_s3 import upload_to_s3
 
 # Configure logging
 logging.basicConfig(
