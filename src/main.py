@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 from .export_data import export_data
 from .upload_to_s3 import upload_to_s3
+from .config import sanity_project_id, sanity_api_token, aws_bucket_name
 
 # Configure logging
 logging.basicConfig(
@@ -24,10 +25,6 @@ missing_vars = [var for var in required_env_vars if not os.getenv(var)]
 if missing_vars:
     logger.error(f"Missing required environment variables: {', '.join(missing_vars)}")
     raise EnvironmentError(f"Missing required environment variables: {', '.join(missing_vars)}")
-
-sanity_project_id = os.getenv("SANITY_PROJECT_ID")
-sanity_api_token = os.getenv("SANITY_API_READ_TOKEN")
-aws_bucket_name = os.getenv("AWS_BUCKET_NAME")
 
 def main():
     logger.info(f"Starting backup process for project: {sanity_project_id}")
